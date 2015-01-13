@@ -28,7 +28,7 @@ class GCM
   # gcm = GCM.new("API_KEY")
   # gcm.send(registration_ids: ["4sdsx", "8sdsd"], {data: {score: "5x1"}})
   def send_notification(registration_ids, options = {})
-    post_body = build_post_body(registration_ids, options)
+    post_body = registration_ids.blank? && options.has_key?(:to) ? options : build_post_body(registration_ids, options)
 
     params = {
       :body => post_body.to_json,
